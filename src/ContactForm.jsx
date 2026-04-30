@@ -5,6 +5,15 @@ export default function ContactForm() {
   const [status, setStatus] = useState('');
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
+  const openMailClient = payload => {
+    const subject = encodeURIComponent('Zgłoszenie instalacji do analizy');
+    const body = encodeURIComponent(
+      `Imię i nazwisko: ${payload.name}\nEmail: ${payload.email}\n\nWiadomość:\n${payload.message}`
+    );
+
+    window.location.href = `mailto:kontakt@tdkproservice.pl?subject=${subject}&body=${body}`;
+  };
+
   const handleSubmit = async e => {
     e.preventDefault();
     const payload = {
@@ -18,22 +27,8 @@ export default function ContactForm() {
       return;
     }
 
-    setStatus('Wysyłanie...');
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      const data = await res.json();
-      setStatus(
-        data.success
-          ? 'Dziękujemy. Zgłoszenie zostało przyjęte. Skontaktujemy się po wstępnej analizie.'
-          : 'Błąd wysyłki'
-      );
-    } catch {
-      setStatus('Błąd sieci');
-    }
+    openMailClient(payload);
+    setStatus('Dziękujemy. Zgłoszenie zostało przygotowane w programie pocztowym.');
   };
 
   return (
