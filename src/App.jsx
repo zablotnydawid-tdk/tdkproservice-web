@@ -1,0 +1,134 @@
+import React from 'react';
+import ContactForm from './ContactForm';
+
+const services = [
+  'Audyt WESS instalacji OZE',
+  'Diagnostyka PV: stringi, MPPT, falownik, clipping, zacienienie',
+  'Pompy ciepła: COP, taktowanie, krzywa grzewcza, grzałki',
+  'Magazyny energii i systemy hybrydowe',
+  'Analiza autokonsumpcji i strat energii',
+  'Audyt rozliczeń energii',
+  'Analiza rachunków i zgodności z umową',
+  'Identyfikacja błędów systemowych i rozliczeniowych',
+  'Raport techniczny po pomiarach',
+  'Wsparcie inwestora po problemach z instalacją'
+];
+
+const workflow = [
+  'Obserwacja',
+  'Dane i pomiary',
+  'Hipoteza techniczna',
+  'Weryfikacja',
+  'Wniosek / raport'
+];
+
+export default function App() {
+  return (
+    <main className="site-shell">
+      <section className="hero" id="top">
+        <div className="hero__content">
+          <p className="eyebrow">Diagnostyka techniczna energii</p>
+          <h1>TDK&ProService</h1>
+          <p className="hero__subtitle">Diagnostyka systemowa OZE, pomp ciepła i magazynów energii</p>
+          <p className="hero__lead">
+            Nie zgadujemy. Sprawdzamy. Instalacja może działać, a jednocześnie generować straty.
+            Dlatego analizujemy cały układ: projekt, montaż, konfigurację, sieć, sterowanie i sposób użytkowania.
+          </p>
+          <div className="hero__actions">
+            <a className="button button--primary" href="#kontakt">Zgłoś instalację do analizy</a>
+            <a className="button button--secondary" href="#zakres">Zobacz zakres pracy</a>
+          </div>
+        </div>
+        <div className="hero__panel" aria-label="Obszary diagnostyki">
+          <span>PV</span>
+          <span>Pompy ciepła</span>
+          <span>Magazyny energii</span>
+          <span>Rozliczenia</span>
+        </div>
+      </section>
+
+      <section className="section section--problem">
+        <div className="section__header">
+          <p className="eyebrow">Problem rynku</p>
+          <h2>Instalacja działa ≠ działa poprawnie</h2>
+        </div>
+        <p className="large-copy">
+          Brak błędu na falowniku nie oznacza braku strat. Pompa ciepła może grzać, ale pracować
+          nieefektywnie. Magazyn energii może być podłączony, ale źle wykorzystany. Rachunki mogą
+          się nie zgadzać mimo poprawnej pracy urządzeń.
+        </p>
+      </section>
+
+      <section className="section" id="zakres">
+        <div className="section__header">
+          <p className="eyebrow">Zakres techniczny</p>
+          <h2>Zakres pracy</h2>
+        </div>
+        <div className="service-grid">
+          {services.map((service) => (
+            <article className="service-card" key={service}>
+              <span className="service-card__marker" />
+              <p>{service}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section expert-section">
+        <div>
+          <p className="eyebrow">Ekspert</p>
+          <h2>Kim jest Dawid Zabłotny</h2>
+        </div>
+        <div className="expert-section__content">
+          <p>
+            Dawid Zabłotny specjalizuje się w analizie rzeczywistej pracy instalacji OZE oraz
+            weryfikacji rozliczeń energii. Łączy diagnostykę instalacji PV, falowników, magazynów
+            energii LiFePO4 i termowizję z analizą danych pomiędzy licznikiem, operatorem sieci
+            i sprzedawcą energii.
+          </p>
+          <blockquote>
+            Jeśli instalacja działa, a rachunki się nie zgadzają — problem może nie być w sprzęcie.
+            Problem może być w systemie.
+          </blockquote>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="section__header">
+          <p className="eyebrow">Metodyka</p>
+          <h2>Jak pracujemy</h2>
+          <p>
+            Decyzje techniczne powinny wynikać z danych, nie z narracji. Nie wskazujemy winnych.
+            Oceniamy układ, zależności i skutki.
+          </p>
+        </div>
+        <div className="timeline">
+          {workflow.map((step, index) => (
+            <article className="timeline-card" key={step}>
+              <span>{index + 1}</span>
+              <h3>{step}</h3>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section contact-section" id="kontakt">
+        <div className="section__header">
+          <p className="eyebrow">Kontakt</p>
+          <h2>Zgłoś instalację do analizy</h2>
+          <p>
+            Opisz typ instalacji, objawy, falownik lub pompę, lokalizację i dostępne dane.
+            Odezwiemy się z informacją, jakie dane będą potrzebne do dalszej weryfikacji.
+          </p>
+        </div>
+        <ContactForm />
+      </section>
+
+      <footer className="footer">
+        <strong>TDK&ProService Dawid Zabłotny</strong>
+        <a href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
+        <span>Słupsk | Pomorskie | Polska</span>
+      </footer>
+    </main>
+  );
+}
