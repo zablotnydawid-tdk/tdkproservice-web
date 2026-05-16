@@ -22,6 +22,48 @@ const workflow = [
   'Wniosek / raport'
 ];
 
+const contactCtas = [
+  {
+    href: 'tel:+48691275254',
+    label: 'Zadzwoń teraz',
+    variant: 'phone'
+  },
+  {
+    href: 'https://m.me/dlugi.dlugi.3',
+    label: 'Napisz na Messengerze',
+    variant: 'messenger'
+  },
+  {
+    href: 'mailto:kontakt@tdkproservice.pl',
+    label: 'kontakt@tdkproservice.pl',
+    variant: 'email'
+  }
+];
+
+function ContactCtas({ className = '' }) {
+  return (
+    <div className={`contact-ctas ${className}`.trim()} aria-label="Szybki kontakt">
+      {contactCtas.map((cta) => (
+        <a className={`contact-cta contact-cta--${cta.variant}`} href={cta.href} key={cta.href}>
+          {cta.label}
+        </a>
+      ))}
+    </div>
+  );
+}
+
+function ContactSectionLinks() {
+  return (
+    <div className="contact-links" aria-label="Kontakt bezpośredni">
+      <a className="contact-link contact-link--phone" href="tel:+48691275254">+48 691 275 254</a>
+      <a className="contact-link" href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
+      <a className="contact-link contact-link--small" href="https://m.me/dlugi.dlugi.3">
+        Messenger jako szybka wiadomość
+      </a>
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <main className="site-shell">
@@ -38,6 +80,8 @@ export default function App() {
             <a className="button button--primary" href="#kontakt">Zgłoś instalację do analizy</a>
             <a className="button button--secondary" href="#zakres">Zobacz zakres pracy</a>
           </div>
+          <ContactCtas className="contact-ctas--hero" />
+          <p className="contact-note">Odpowiadamy możliwie szybko. Pilne sprawy najlepiej telefonicznie.</p>
         </div>
         <div className="hero__panel" aria-label="Obszary diagnostyki">
           <span>PV</span>
@@ -74,6 +118,31 @@ export default function App() {
         </div>
       </section>
 
+      <section className="section online-analysis-section">
+        <div className="online-analysis-card">
+          <div className="online-analysis-card__content">
+            <p className="eyebrow">Raport techniczny online</p>
+            <h2>Analiza kosztów energii online</h2>
+            <p>
+              Wypełnij formularz i wygeneruj wstępny raport techniczny dotyczący kosztów energii,
+              pracy instalacji PV i możliwych strat.
+            </p>
+            <p>
+              Raport PDF generowany jest automatycznie na podstawie danych wejściowych i może
+              stanowić pierwszy etap pełnej diagnostyki technicznej.
+            </p>
+          </div>
+          <a
+            className="button button--primary online-analysis-card__button"
+            href="https://api.tdkproservice.pl"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Rozpocznij analizę online
+          </a>
+        </div>
+      </section>
+
       <section className="section expert-section">
         <div>
           <p className="eyebrow">Ekspert</p>
@@ -90,6 +159,29 @@ export default function App() {
             Jeśli instalacja działa, a rachunki się nie zgadzają — problem może nie być w sprzęcie.
             Problem może być w systemie.
           </blockquote>
+        </div>
+      </section>
+
+      <section className="section media-section">
+        <div className="media-card">
+          <div>
+            <p className="eyebrow">Media</p>
+            <h2>W mediach</h2>
+          </div>
+          <div className="media-card__content">
+            <p>
+              Dawid Zabłotny był cytowany jako ekspert w ogólnopolskim portalu Fakt.pl w temacie
+              problemów rynku fotowoltaiki i realnych doświadczeń użytkowników.
+            </p>
+            <a
+              className="button button--secondary media-card__button"
+              href="https://www.fakt.pl/pieniadze/nie-tylko-przemyslaw-czarnek-rozczarowany-fotowoltaika-na-to-skarza-sie-ludzie/g6y4crj"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Zobacz publikację
+            </a>
+          </div>
         </div>
       </section>
 
@@ -120,6 +212,8 @@ export default function App() {
             Opisz typ instalacji, objawy, falownik lub pompę, lokalizację i dostępne dane.
             Odezwiemy się z informacją, jakie dane będą potrzebne do dalszej weryfikacji.
           </p>
+          <p className="contact-note">Odpowiadamy możliwie szybko. Pilne sprawy najlepiej telefonicznie.</p>
+          <ContactSectionLinks />
         </div>
         <ContactForm />
       </section>
@@ -127,6 +221,7 @@ export default function App() {
       <footer className="footer">
         <strong>TDK&ProService Dawid Zabłotny</strong>
         <a href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
+        <a href="tel:+48691275254">+48 691 275 254</a>
         <span>Słupsk | Pomorskie | Polska</span>
       </footer>
     </main>

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [status, setStatus] = useState('');
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
   const openMailClient = payload => {
-    const subject = encodeURIComponent('Zgłoszenie instalacji do analizy');
+    const subject = encodeURIComponent('Zgłoszenie ze strony TDK&ProService');
     const body = encodeURIComponent(
-      `Imię i nazwisko: ${payload.name}\nEmail: ${payload.email}\n\nWiadomość:\n${payload.message}`
+      `Imię: ${payload.name}\nEmail: ${payload.email}\nTelefon: ${payload.phone}\nOpis problemu: ${payload.message}`
     );
 
     window.location.href = `mailto:kontakt@tdkproservice.pl?subject=${subject}&body=${body}`;
@@ -19,16 +19,17 @@ export default function ContactForm() {
     const payload = {
       name: form.name.trim(),
       email: form.email.trim(),
+      phone: form.phone.trim(),
       message: form.message.trim()
     };
 
-    if (!payload.name || !payload.email || !payload.message) {
+    if (!payload.name || !payload.email || !payload.phone || !payload.message) {
       setStatus('Uzupełnij wymagane pola.');
       return;
     }
 
     openMailClient(payload);
-    setStatus('Dziękujemy. Zgłoszenie zostało przygotowane w programie pocztowym.');
+    setStatus('Jeśli okno poczty się nie otworzy, napisz bezpośrednio na kontakt@tdkproservice.pl');
   };
 
   return (
@@ -36,7 +37,7 @@ export default function ContactForm() {
       <form className="contact-form" onSubmit={handleSubmit}>
         <input
           name="name"
-          placeholder="Imię i nazwisko"
+          placeholder="Imię"
           value={form.name}
           onChange={handleChange}
           required
@@ -49,9 +50,17 @@ export default function ContactForm() {
           onChange={handleChange}
           required
         />
+        <input
+          name="phone"
+          type="tel"
+          placeholder="Telefon"
+          value={form.phone}
+          onChange={handleChange}
+          required
+        />
         <textarea
           name="message"
-          placeholder="Typ instalacji, objawy, lokalizacja, dostępne dane"
+          placeholder="Opis problemu"
           value={form.message}
           onChange={handleChange}
           required

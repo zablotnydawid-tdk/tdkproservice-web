@@ -122,6 +122,96 @@ p {
   margin-top: 34px;
 }
 
+.contact-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.contact-cta {
+  display: inline-flex;
+  min-height: 50px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0 18px;
+  color: var(--text);
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.18);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+.contact-cta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125, 227, 255, 0.48);
+  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.24);
+}
+
+.contact-cta--phone {
+  border-color: rgba(73, 199, 232, 0.54);
+  background: var(--accent);
+  color: #041014;
+}
+
+.contact-cta--messenger {
+  border-color: rgba(125, 227, 255, 0.7);
+  background: linear-gradient(135deg, rgba(0, 132, 255, 0.95), rgba(73, 199, 232, 0.92));
+  color: #f8fcff;
+}
+
+.contact-cta--email {
+  color: var(--accent-strong);
+}
+
+.contact-ctas--hero {
+  margin-top: 18px;
+}
+
+.contact-note {
+  max-width: 620px;
+  margin: 16px 0 0;
+  color: var(--success);
+  font-size: 0.96rem;
+}
+
+.contact-links {
+  display: grid;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.contact-link {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  border-bottom: 1px solid rgba(125, 227, 255, 0.28);
+  color: var(--accent-strong);
+  font-weight: 800;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.contact-link:hover {
+  border-color: var(--accent-strong);
+  color: var(--text);
+}
+
+.contact-link--phone {
+  color: var(--text);
+  font-size: 1.12rem;
+}
+
+.contact-link--small {
+  width: fit-content;
+  border-bottom-color: rgba(159, 177, 188, 0.34);
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
 .button,
 .contact-form button {
   display: inline-flex;
@@ -240,6 +330,50 @@ p {
   box-shadow: 0 0 20px rgba(73, 199, 232, 0.7);
 }
 
+.online-analysis-section {
+  padding-top: 48px;
+}
+
+.online-analysis-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 36px;
+  align-items: center;
+  padding: clamp(24px, 4vw, 38px);
+  border: 1px solid rgba(125, 227, 255, 0.28);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(73, 199, 232, 0.16), transparent 22rem),
+    linear-gradient(135deg, rgba(16, 36, 45, 0.94), rgba(6, 15, 19, 0.94));
+  box-shadow: var(--shadow);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.online-analysis-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(125, 227, 255, 0.48);
+  box-shadow: 0 28px 88px rgba(0, 0, 0, 0.42);
+}
+
+.online-analysis-card h2 {
+  max-width: 820px;
+}
+
+.online-analysis-card__content p {
+  max-width: 760px;
+  margin-bottom: 14px;
+}
+
+.online-analysis-card__content p:last-child {
+  margin-bottom: 0;
+}
+
+.online-analysis-card__button {
+  min-width: 250px;
+  min-height: 56px;
+  white-space: nowrap;
+}
+
 .expert-section {
   display: grid;
   grid-template-columns: 0.65fr 1fr;
@@ -257,6 +391,39 @@ blockquote {
   font-size: clamp(1.35rem, 3vw, 2.25rem);
   font-weight: 800;
   line-height: 1.16;
+}
+
+.media-section {
+  padding-top: 48px;
+}
+
+.media-card {
+  display: grid;
+  grid-template-columns: 0.7fr 1fr;
+  gap: 44px;
+  align-items: center;
+  padding: 32px;
+  border: 1px solid rgba(125, 227, 255, 0.26);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(73, 199, 232, 0.14), transparent 24rem),
+    linear-gradient(135deg, rgba(16, 36, 45, 0.92), rgba(7, 16, 20, 0.9));
+  box-shadow: var(--shadow);
+}
+
+.media-card h2 {
+  margin-bottom: 0;
+}
+
+.media-card__content p {
+  max-width: 680px;
+  margin-bottom: 22px;
+  color: var(--text);
+  font-size: 1.08rem;
+}
+
+.media-card__button {
+  width: fit-content;
 }
 
 .timeline {
@@ -374,7 +541,9 @@ blockquote {
 
   .hero,
   .section--problem,
+  .online-analysis-card,
   .expert-section,
+  .media-card,
   .contact-section {
     grid-template-columns: 1fr;
   }
@@ -408,16 +577,30 @@ blockquote {
   .contact-card {
     padding: 18px;
   }
+
+  .media-card {
+    gap: 22px;
+    padding: 24px;
+  }
+
+  .online-analysis-card {
+    gap: 24px;
+  }
 }
 
 @media (max-width: 520px) {
   .hero__actions,
+  .contact-ctas,
   .button,
+  .contact-cta,
+  .online-analysis-card__button,
+  .media-card__button,
   .contact-form button {
     width: 100%;
   }
 
   .button,
+  .contact-cta,
   .contact-form button {
     padding-inline: 14px;
   }
