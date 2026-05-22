@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ContactForm from './ContactForm';
 
 const services = [
@@ -41,6 +41,40 @@ const contactCtas = [
   }
 ];
 
+const siteUrl = 'https://www.tdkproservice.pl';
+
+function setMetaTag(name, content, attribute = 'name') {
+  let tag = document.head.querySelector(`meta[${attribute}="${name}"]`);
+  if (!tag) {
+    tag = document.createElement('meta');
+    tag.setAttribute(attribute, name);
+    document.head.appendChild(tag);
+  }
+  tag.setAttribute('content', content);
+}
+
+function setCanonical(pathname) {
+  let link = document.head.querySelector('link[rel="canonical"]');
+  if (!link) {
+    link = document.createElement('link');
+    link.setAttribute('rel', 'canonical');
+    document.head.appendChild(link);
+  }
+  link.setAttribute('href', `${siteUrl}${pathname}`);
+}
+
+function usePageMeta({ title, description, pathname }) {
+  useEffect(() => {
+    document.title = title;
+    setMetaTag('description', description);
+    setMetaTag('og:title', title, 'property');
+    setMetaTag('og:description', description, 'property');
+    setMetaTag('og:type', 'website', 'property');
+    setMetaTag('og:url', `${siteUrl}${pathname}`, 'property');
+    setCanonical(pathname);
+  }, [title, description, pathname]);
+}
+
 function ContactCtas({ className = '' }) {
   return (
     <div className={`contact-ctas ${className}`.trim()} aria-label="Szybki kontakt">
@@ -74,7 +108,25 @@ function ContactSectionLinks() {
   );
 }
 
-export default function App() {
+function Footer() {
+  return (
+    <footer className="footer">
+      <strong>TDK&ProService Dawid Zabłotny</strong>
+      <a href="/dawid-zablotny">Dawid Zabłotny - autor i właściciel</a>
+      <a href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
+      <a href="tel:+48691275254">+48 691 275 254</a>
+      <span>Słupsk | Pomorskie | Polska</span>
+    </footer>
+  );
+}
+
+function HomePage() {
+  usePageMeta({
+    title: 'TDK&ProService | Diagnostyka OZE i Audyt Rozliczeń Energii',
+    description: 'Diagnostyka instalacji PV, pomp ciepła, magazynów energii oraz audyt rozliczeń energii. TDK&ProService Dawid Zabłotny.',
+    pathname: '/'
+  });
+
   return (
     <main className="site-shell">
       <section className="hero" id="top">
@@ -168,6 +220,9 @@ export default function App() {
             energii LiFePO4 i termowizję z analizą danych pomiędzy licznikiem, operatorem sieci
             i sprzedawcą energii.
           </p>
+          <a className="contact-link contact-link--small" href="/dawid-zablotny">
+            Więcej o autorze i metodyce TDK&ProService
+          </a>
           <blockquote>
             Jeśli instalacja działa, a rachunki się nie zgadzają — problem może nie być w sprzęcie.
             Problem może być w systemie.
@@ -234,12 +289,150 @@ export default function App() {
         <ContactForm />
       </section>
 
-      <footer className="footer">
-        <strong>TDK&ProService Dawid Zabłotny</strong>
-        <a href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
-        <a href="tel:+48691275254">+48 691 275 254</a>
-        <span>Słupsk | Pomorskie | Polska</span>
-      </footer>
+      <Footer />
     </main>
   );
+}
+
+function FounderPage() {
+  usePageMeta({
+    title: 'Dawid Zabłotny - diagnostyka OZE i TDK&ProService',
+    description: 'Dawid Zabłotny, właściciel TDK&ProService. Diagnostyka instalacji PV, pomp ciepła, magazynów energii i rozliczeń energii.',
+    pathname: '/dawid-zablotny'
+  });
+
+  return (
+    <main className="site-shell">
+      <section className="author-hero">
+        <div>
+          <p className="eyebrow">Autor i właściciel</p>
+          <h1>Dawid Zabłotny</h1>
+          <p className="hero__subtitle">TDK&ProService - diagnostyka techniczna energii</p>
+          <p className="hero__lead">
+            Za TDK&ProService stoi praktyka terenowa i analiza rzeczywistych przypadków: instalacji
+            PV, pomp ciepła, magazynów energii oraz rozliczeń energii. Celem pracy nie jest efektowna
+            obietnica, tylko sprawdzenie, czy układ działa logicznie i gdzie mogą powstawać straty.
+          </p>
+          <div className="hero__actions">
+            <a className="button button--primary" href="/#kontakt">Skontaktuj się</a>
+            <a className="button button--secondary" href="/">Wróć do strony głównej</a>
+          </div>
+        </div>
+        <aside className="author-card" aria-label="Profil TDK&ProService">
+          <span>TDK&ProService</span>
+          <strong>Dawid Zabłotny</strong>
+          <p>Słupsk | Pomorskie | Polska</p>
+          <p>PV | Pompy ciepła | Magazyny energii | Rozliczenia</p>
+        </aside>
+      </section>
+
+      <section className="section author-method">
+        <div>
+          <p className="eyebrow">Metodyka</p>
+          <h2>Obserwacja → dane → weryfikacja → wniosek</h2>
+        </div>
+        <div className="author-method__content">
+          <p>
+            TDK&ProService zaczyna od objawów i danych: zużycia energii, produkcji PV, faktur,
+            ustawień urządzeń, historii pracy instalacji i informacji od użytkownika. Dopiero potem
+            powstaje hipoteza techniczna i wskazanie, co trzeba sprawdzić dalej.
+          </p>
+          <p>
+            Wstępne raporty online KODEKS są screeningiem kierunkowym. Nie zastępują pełnej
+            diagnostyki technicznej, pomiarów, oględzin ani opinii rzeczoznawczej.
+          </p>
+        </div>
+      </section>
+
+      <section className="section author-section">
+        <div className="section__header">
+          <p className="eyebrow">Zakres pracy</p>
+          <h2>Obszary diagnostyki</h2>
+        </div>
+        <div className="trust-grid">
+          <article className="trust-card">
+            <h3>Instalacje PV</h3>
+            <p>Analiza produkcji, falowników, stringów, MPPT, clippingu, zacienienia i dopasowania instalacji do zużycia.</p>
+          </article>
+          <article className="trust-card">
+            <h3>Pompy ciepła</h3>
+            <p>Ocena objawów pracy: taktowanie, grzałki, krzywa grzewcza, ustawienia i wpływ sposobu użytkowania na koszty.</p>
+          </article>
+          <article className="trust-card">
+            <h3>Magazyny energii</h3>
+            <p>Weryfikacja roli magazynu w autokonsumpcji, sterowaniu i ograniczaniu kosztów utraconej energii.</p>
+          </article>
+          <article className="trust-card">
+            <h3>Rozliczenia energii</h3>
+            <p>Porównanie faktur, profilu zużycia, produkcji i możliwych źródeł rozbieżności między pracą systemu a kosztami.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section media-section">
+        <div className="media-card">
+          <div>
+            <p className="eyebrow">Media / Publikacje</p>
+            <h2>Wzmianki i materiały</h2>
+          </div>
+          <div className="media-card__content">
+            <p>
+              Dawid Zabłotny był cytowany jako ekspert w ogólnopolskim portalu Fakt.pl w temacie
+              problemów rynku fotowoltaiki i doświadczeń użytkowników. Kolejne publikacje i wzmianki
+              mogą być dodawane w tej sekcji bez zmiany charakteru strony.
+            </p>
+            <div className="publication-list">
+              <a
+                className="publication-item"
+                href="https://www.fakt.pl/pieniadze/nie-tylko-przemyslaw-czarnek-rozczarowany-fotowoltaika-na-to-skarza-sie-ludzie/g6y4crj"
+                rel="noopener noreferrer"
+                target="_blank"
+              >
+                Fakt.pl - wypowiedź ekspercka o rynku fotowoltaiki
+              </a>
+              <span className="publication-item publication-item--placeholder">Miejsce na przyszłe publikacje</span>
+              <span className="publication-item publication-item--placeholder">Miejsce na wzmianki medialne</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section author-section">
+        <div className="section__header">
+          <p className="eyebrow">Zasady komunikacji</p>
+          <h2>Bez obietnic bez danych</h2>
+          <p>
+            TDK&ProService nie obiecuje oszczędności bez analizy danych i nie nazywa prostego
+            formularza pełnym audytem. Jeżeli dostępne są tylko dane podstawowe, wynik jest
+            traktowany jako sygnał kierunkowy i pierwszy etap rozmowy technicznej.
+          </p>
+        </div>
+      </section>
+
+      <section className="section contact-section" id="kontakt">
+        <div className="section__header">
+          <p className="eyebrow">Kontakt</p>
+          <h2>Kontakt z TDK&ProService</h2>
+          <p>
+            Jeśli chcesz sprawdzić instalację, rachunki albo wstępny raport KODEKS, opisz krótko
+            sytuację i dostępne dane. Pilne sprawy najlepiej kierować telefonicznie lub przez Messenger.
+          </p>
+          <ContactSectionLinks />
+        </div>
+        <ContactForm />
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
+export default function App() {
+  const pathname = window.location.pathname.replace(/\/$/, '') || '/';
+
+  if (pathname === '/dawid-zablotny' || pathname === '/o-mnie') {
+    return <FounderPage />;
+  }
+
+  return <HomePage />;
 }
