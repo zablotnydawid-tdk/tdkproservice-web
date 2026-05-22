@@ -454,9 +454,7 @@ function HomePage() {
           </div>
           <a
             className="button button--primary online-analysis-card__button"
-            href="https://api.tdkproservice.pl"
-            rel="noopener noreferrer"
-            target="_blank"
+            href="/analiza-online"
           >
             Rozpocznij analizę online
           </a>
@@ -878,8 +876,122 @@ function DocumentsPage() {
   );
 }
 
+function KodeksOnlinePage() {
+  usePageMeta({
+    title: 'Wstępna ocena systemu OZE | TDK&ProService KODEKS',
+    description: 'Wstępna ocena systemu OZE za 39,99 zł. Screening techniczno-energetyczny na podstawie danych użytkownika, obsługiwany przez system KODEKS.',
+    pathname: '/analiza-online',
+    keywords: 'wstępna ocena OZE, analiza kosztów energii, screening PV, KODEKS, TDK&ProService, raport PDF OZE'
+  });
+
+  return (
+    <main className="site-shell">
+      <section className="kodeks-hero">
+        <div>
+          <p className="eyebrow">KODEKS online</p>
+          <h1>Wstępna ocena systemu OZE</h1>
+          <p className="hero__subtitle">Screening techniczno-energetyczny na podstawie danych użytkownika</p>
+          <p className="hero__lead">
+            Wprowadzasz podstawowe dane o zużyciu energii, cenie energii i pracy instalacji PV.
+            System przygotowuje wstępny PDF z przeliczeniem kosztów i kierunkową interpretacją.
+          </p>
+          <div className="hero__actions">
+            <a
+              className="button button--primary"
+              href="https://api.tdkproservice.pl/form-analyze"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              Rozpocznij wstępną ocenę
+            </a>
+            <a className="button button--secondary" href="/">
+              Wróć do strony głównej
+            </a>
+          </div>
+        </div>
+        <aside className="kodeks-price-card" aria-label="Cena wstępnej oceny KODEKS">
+          <span>Wstępna ocena KODEKS</span>
+          <strong>39,99 zł</strong>
+          <p>PDF z podstawowym przeliczeniem kosztów, interpretacją kierunkową i listą obszarów do dalszej weryfikacji.</p>
+        </aside>
+      </section>
+
+      <section className="section kodeks-section">
+        <div className="section__header">
+          <p className="eyebrow">Zakres</p>
+          <h2>Co obejmuje analiza</h2>
+        </div>
+        <div className="trust-grid">
+          <article className="trust-card">
+            <h3>Dane wejściowe</h3>
+            <p>Zużycie miesięczne, cena energii, moc instalacji PV i miesięczna produkcja PV.</p>
+          </article>
+          <article className="trust-card">
+            <h3>Podstawowe przeliczenie</h3>
+            <p>Porównanie kosztu energii przed i po uwzględnieniu deklarowanej produkcji PV.</p>
+          </article>
+          <article className="trust-card">
+            <h3>Interpretacja kierunkowa</h3>
+            <p>Wskazanie, czy dane sugerują obszary wymagające dalszego sprawdzenia.</p>
+          </article>
+          <article className="trust-card">
+            <h3>PDF dla zgłoszenia</h3>
+            <p>Raport generowany przez system KODEKS działający w tle.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section author-method">
+        <div>
+          <p className="eyebrow">Ważne</p>
+          <h2>To nie jest pełny audyt techniczny</h2>
+        </div>
+        <div className="author-method__content">
+          <p>
+            Wynik opiera się na danych wpisanych w formularzu i ma charakter wstępny. Pełna
+            diagnostyka wymaga faktur, danych z falownika, historii pracy instalacji, sposobu
+            zużycia energii i czasem pomiarów lub oględzin.
+          </p>
+          <p>
+            Formularz i PDF obsługiwane są przez system KODEKS działający w tle. Dla klienta
+            najważniejszy jest prosty proces: dane, płatność, PDF i dalszy kontakt, jeśli wynik
+            wymaga wyjaśnienia.
+          </p>
+        </div>
+      </section>
+
+      <section className="section online-analysis-section">
+        <div className="online-analysis-card">
+          <div className="online-analysis-card__content">
+            <p className="eyebrow">Start</p>
+            <h2>Przejdź do formularza KODEKS</h2>
+            <p>
+              Po kliknięciu przejdziesz do bezpiecznego formularza obsługiwanego przez system
+              KODEKS. Po uzupełnieniu danych zgłoszenie zostanie zapisane w procesie KODEKS.
+            </p>
+          </div>
+          <a
+            className="button button--primary online-analysis-card__button"
+            href="https://api.tdkproservice.pl/form-analyze"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Rozpocznij wstępną ocenę
+          </a>
+        </div>
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
 export default function App() {
   const pathname = window.location.pathname.replace(/\/$/, '') || '/';
+
+  if (pathname === '/analiza-online' || pathname === '/kodeks') {
+    return <KodeksOnlinePage />;
+  }
 
   if (pathname === '/dawid-zablotny' || pathname === '/o-mnie') {
     return <FounderPage />;

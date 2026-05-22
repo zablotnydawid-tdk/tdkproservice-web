@@ -578,7 +578,17 @@ blockquote {
   padding: 72px 0 48px;
 }
 
+.kodeks-hero {
+  min-height: 78vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
+  gap: 64px;
+  align-items: center;
+  padding: 72px 0 48px;
+}
+
 .documents-note,
+.kodeks-price-card,
 .document-card,
 .documents-rules article {
   border: 1px solid var(--line);
@@ -594,11 +604,38 @@ blockquote {
   background: linear-gradient(180deg, rgba(16, 36, 45, 0.9), rgba(9, 19, 25, 0.88));
 }
 
+.kodeks-price-card {
+  display: grid;
+  gap: 14px;
+  padding: 26px;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(73, 199, 232, 0.12), transparent 18rem),
+    linear-gradient(180deg, rgba(16, 36, 45, 0.92), rgba(9, 19, 25, 0.88));
+}
+
 .documents-note strong {
   color: var(--accent-strong);
   font-size: 0.78rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.kodeks-price-card span {
+  color: var(--accent-strong);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.kodeks-price-card strong {
+  color: var(--text);
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1;
+}
+
+.kodeks-price-card p {
+  margin: 0;
 }
 
 .documents-note p {
@@ -844,6 +881,7 @@ blockquote {
   .hero,
   .author-hero,
   .documents-hero,
+  .kodeks-hero,
   .section--problem,
   .author-method,
   .online-analysis-card,
