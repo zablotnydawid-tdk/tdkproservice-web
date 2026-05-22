@@ -402,6 +402,29 @@ p {
   white-space: nowrap;
 }
 
+.document-entry-card {
+  align-items: start;
+}
+
+.document-entry-list {
+  display: grid;
+  gap: 8px;
+  margin: 18px 0 0;
+  padding-left: 18px;
+  color: var(--text);
+}
+
+.document-entry-list li {
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.document-entry-actions {
+  display: grid;
+  gap: 12px;
+  justify-items: start;
+}
+
 .expert-section {
   display: grid;
   grid-template-columns: 0.65fr 1fr;
@@ -876,6 +899,10 @@ blockquote {
   .online-analysis-card {
     gap: 24px;
   }
+
+  .document-entry-actions {
+    width: 100%;
+  }
 }
 
 @media (max-width: 640px) {
@@ -984,6 +1011,7 @@ blockquote {
   .button,
   .contact-cta,
   .online-analysis-card__button,
+  .document-entry-actions,
   .media-card__button,
   .contact-form button {
     width: 100%;

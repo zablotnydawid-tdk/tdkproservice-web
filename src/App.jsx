@@ -367,7 +367,7 @@ function Footer() {
     <footer className="footer">
       <strong>TDK&ProService Dawid Zabłotny</strong>
       <a href="/dawid-zablotny">Dawid Zabłotny - autor i właściciel</a>
-      <a href="/wzory-pism">Wzory pism OZE i energia</a>
+      <a href="/wzory-pism">Wzory pism i zgłoszeń</a>
       <a href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
       <a href="tel:+48691275254">+48 691 275 254</a>
       <span>Słupsk | Pomorskie | Polska</span>
@@ -464,18 +464,29 @@ function HomePage() {
       </section>
 
       <section className="section online-analysis-section">
-        <div className="online-analysis-card">
+        <div className="online-analysis-card document-entry-card">
           <div className="online-analysis-card__content">
             <p className="eyebrow">Dokumenty praktyczne</p>
-            <h2>Wzory pism dla spraw OZE i energii</h2>
+            <h2>Praktyczne wzory pism</h2>
             <p>
-              Proste wzory pomagające uporządkować zgłoszenie do OSD, sprzedawcy energii albo serwisu PV.
-              To materiały techniczno-informacyjne, nie porada prawna.
+              Masz problem z wyłączaniem falownika, wysokim napięciem albo rozliczeniem energii?
+              Przygotowaliśmy spokojne wzory zgłoszeń, które pomagają opisać problem technicznie
+              i bez chaosu.
             </p>
+            <ul className="document-entry-list">
+              <li>zgłoszenie wyłączania falownika / wysokiego napięcia,</li>
+              <li>wniosek o sprawdzenie napięcia sieci,</li>
+              <li>reklamacja rozliczenia energii.</li>
+            </ul>
           </div>
-          <a className="button button--secondary online-analysis-card__button" href="/wzory-pism">
-            Przejdź do wzorów
-          </a>
+          <div className="document-entry-actions">
+            <a className="button button--primary online-analysis-card__button" href="/wzory-pism">
+              Zobacz wzory pism
+            </a>
+            <a className="contact-link contact-link--small" href="/strefa-dokumentow">
+              Strefa dokumentów
+            </a>
+          </div>
         </div>
       </section>
 
