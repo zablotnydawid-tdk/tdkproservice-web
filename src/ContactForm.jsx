@@ -29,7 +29,9 @@ export default function ContactForm() {
     }
 
     openMailClient(payload);
-    setStatus('Jeśli okno poczty się nie otworzy, napisz bezpośrednio na kontakt@tdkproservice.pl');
+    setStatus(
+      'Zgłoszenie zostało przygotowane do wysyłki. Jeśli nie otrzymasz odpowiedzi, skontaktuj się telefonicznie lub przez Messenger.'
+    );
   };
 
   return (
@@ -70,6 +72,14 @@ export default function ContactForm() {
         </button>
       </form>
       {status && <p className="form-status">{status}</p>}
+      {status && (
+        <div className="form-fallback-actions" aria-label="Kontakt alternatywny">
+          <a href="tel:+48691275254">Zadzwoń: +48 691 275 254</a>
+          <a href="https://m.me/dlugi.dlugi.3" rel="noopener noreferrer" target="_blank">
+            Messenger
+          </a>
+        </div>
+      )}
     </section>
   );
 }

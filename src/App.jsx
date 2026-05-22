@@ -31,7 +31,8 @@ const contactCtas = [
   {
     href: 'https://m.me/dlugi.dlugi.3',
     label: 'Napisz na Messengerze',
-    variant: 'messenger'
+    variant: 'messenger',
+    external: true
   },
   {
     href: 'mailto:kontakt@tdkproservice.pl',
@@ -44,7 +45,13 @@ function ContactCtas({ className = '' }) {
   return (
     <div className={`contact-ctas ${className}`.trim()} aria-label="Szybki kontakt">
       {contactCtas.map((cta) => (
-        <a className={`contact-cta contact-cta--${cta.variant}`} href={cta.href} key={cta.href}>
+        <a
+          className={`contact-cta contact-cta--${cta.variant}`}
+          href={cta.href}
+          key={cta.href}
+          rel={cta.external ? 'noopener noreferrer' : undefined}
+          target={cta.external ? '_blank' : undefined}
+        >
           {cta.label}
         </a>
       ))}
@@ -56,10 +63,13 @@ function ContactSectionLinks() {
   return (
     <div className="contact-links" aria-label="Kontakt bezpośredni">
       <a className="contact-link contact-link--phone" href="tel:+48691275254">+48 691 275 254</a>
-      <a className="contact-link" href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
-      <a className="contact-link contact-link--small" href="https://m.me/dlugi.dlugi.3">
+      <a className="contact-link contact-link--messenger" href="https://m.me/dlugi.dlugi.3" rel="noopener noreferrer" target="_blank">
         Messenger jako szybka wiadomość
       </a>
+      <a className="contact-link contact-link--email" href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
+      <p className="contact-fallback">
+        W przypadku problemów z dostarczeniem wiadomości prosimy o kontakt telefoniczny lub Messenger.
+      </p>
     </div>
   );
 }
@@ -82,6 +92,9 @@ export default function App() {
           </div>
           <ContactCtas className="contact-ctas--hero" />
           <p className="contact-note">Odpowiadamy możliwie szybko. Pilne sprawy najlepiej telefonicznie.</p>
+          <p className="contact-fallback contact-fallback--hero">
+            Jeśli nie otrzymasz odpowiedzi mailowej, skontaktuj się telefonicznie lub przez Messenger.
+          </p>
         </div>
         <div className="hero__panel" aria-label="Obszary diagnostyki">
           <span>PV</span>
@@ -213,6 +226,9 @@ export default function App() {
             Odezwiemy się z informacją, jakie dane będą potrzebne do dalszej weryfikacji.
           </p>
           <p className="contact-note">Odpowiadamy możliwie szybko. Pilne sprawy najlepiej telefonicznie.</p>
+          <p className="contact-fallback">
+            Jeśli nie otrzymasz odpowiedzi mailowej, skontaktuj się telefonicznie lub przez Messenger.
+          </p>
           <ContactSectionLinks />
         </div>
         <ContactForm />

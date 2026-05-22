@@ -178,6 +178,18 @@ p {
   font-size: 0.96rem;
 }
 
+.contact-fallback {
+  max-width: 620px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.contact-fallback--hero {
+  margin-top: 8px;
+}
+
 .contact-links {
   display: grid;
   gap: 10px;
@@ -202,6 +214,16 @@ p {
 .contact-link--phone {
   color: var(--text);
   font-size: 1.12rem;
+}
+
+.contact-link--messenger {
+  color: var(--accent-strong);
+  font-size: 1.04rem;
+  font-weight: 850;
+}
+
+.contact-link--email {
+  color: var(--muted);
 }
 
 .contact-link--small {
@@ -500,6 +522,26 @@ blockquote {
   color: var(--success);
 }
 
+.form-fallback-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.form-fallback-actions a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(125, 227, 255, 0.32);
+  border-radius: 6px;
+  padding: 0 14px;
+  color: var(--accent-strong);
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.035);
+}
+
 .footer {
   display: flex;
   flex-direction: column;
@@ -601,8 +643,38 @@ blockquote {
 
   .button,
   .contact-cta,
+  .form-fallback-actions a,
   .contact-form button {
     padding-inline: 14px;
+  }
+
+  .contact-ctas {
+    display: grid;
+  }
+
+  .contact-cta--phone,
+  .contact-cta--messenger {
+    min-height: 54px;
+    font-size: 1rem;
+  }
+
+  .contact-cta--email {
+    min-height: 44px;
+    color: var(--muted);
+    font-size: 0.92rem;
+  }
+
+  .contact-link--phone,
+  .contact-link--messenger {
+    font-size: 1.08rem;
+  }
+
+  .contact-link--email {
+    font-size: 0.92rem;
+  }
+
+  .form-fallback-actions {
+    display: grid;
   }
 
   h1 {
