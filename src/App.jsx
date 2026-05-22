@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ContactForm from './ContactForm';
 
 const services = [
@@ -43,6 +43,236 @@ const contactCtas = [
 
 const siteUrl = 'https://www.tdkproservice.pl';
 
+const documentTemplates = [
+  {
+    id: 'falownik-wysokie-napiecie',
+    title: 'Wyłączanie falownika / wysokie napięcie',
+    when: 'Gdy falownik ogranicza moc, rozłącza się lub pokazuje komunikaty związane z wysokim napięciem sieci.',
+    concerns: 'Opisuje objawy pracy instalacji PV i prośbę o techniczną weryfikację parametrów zasilania.',
+    limits: 'Nie przesądza winy OSD ani instalatora i nie zastępuje pomiarów wykonanych przez uprawnioną osobę.',
+    body: `Miejscowość, data: [miejsce i data]
+
+Nadawca:
+[imię i nazwisko]
+[adres]
+[numer PPE lub numer klienta, jeśli dotyczy]
+[telefon / email]
+
+Adresat:
+[nazwa OSD / sprzedawcy / serwisu]
+[adres]
+
+Temat: Zgłoszenie problemu z pracą falownika PV - wysokie napięcie
+
+Dzień dobry,
+
+zgłaszam problem z pracą instalacji fotowoltaicznej pod adresem: [adres instalacji].
+
+Objawy:
+- falownik okresowo ogranicza moc lub wyłącza się,
+- w aplikacji / historii pracy widoczne są komunikaty dotyczące napięcia sieci,
+- problem występuje najczęściej w godzinach: [godziny],
+- problem występuje w dniach / warunkach: [opis].
+
+Podstawowe dane instalacji:
+- moc instalacji PV: [kWp],
+- model falownika: [model],
+- data uruchomienia instalacji: [data],
+- przyłącze: [jednofazowe / trójfazowe].
+
+Proszę o informację, jakie dane należy przekazać do dalszej weryfikacji oraz czy możliwe jest sprawdzenie parametrów napięcia w punkcie przyłączenia.
+
+Załączniki, jeśli dostępne:
+- zrzuty ekranu z aplikacji falownika,
+- lista błędów,
+- wykres napięcia,
+- zdjęcie tabliczki znamionowej falownika.
+
+Z poważaniem,
+[imię i nazwisko]`
+  },
+  {
+    id: 'sprawdzenie-napiecia-sieci',
+    title: 'Wniosek o sprawdzenie napięcia sieci',
+    when: 'Gdy występują powtarzalne problemy z napięciem, wyłączaniem falownika lub nietypową pracą urządzeń.',
+    concerns: 'Porządkuje prośbę o sprawdzenie parametrów napięcia w miejscu przyłączenia.',
+    limits: 'Nie jest ekspertyzą techniczną i nie przesądza, jaka jest przyczyna problemu.',
+    body: `Miejscowość, data: [miejsce i data]
+
+Nadawca:
+[imię i nazwisko]
+[adres]
+[numer PPE / numer licznika, jeśli dostępny]
+[telefon / email]
+
+Adresat:
+[nazwa OSD]
+[adres]
+
+Temat: Wniosek o sprawdzenie parametrów napięcia sieci
+
+Dzień dobry,
+
+zwracam się z prośbą o sprawdzenie parametrów napięcia sieci w punkcie poboru energii:
+[adres punktu poboru].
+
+Powód zgłoszenia:
+- występują okresowe problemy z pracą instalacji PV / urządzeń elektrycznych,
+- obserwuję objawy mogące wskazywać na podwyższone lub niestabilne napięcie,
+- problem występuje w przybliżeniu: [dni / godziny / warunki].
+
+Proszę o informację, czy możliwe jest wykonanie kontroli parametrów jakości energii lub wskazanie procedury zgłoszenia takiej kontroli.
+
+Dane pomocnicze:
+- numer PPE: [numer],
+- numer licznika: [numer],
+- moc instalacji PV: [kWp],
+- model falownika: [model],
+- przykładowe daty wystąpienia problemu: [daty].
+
+Z poważaniem,
+[imię i nazwisko]`
+  },
+  {
+    id: 'reklamacja-rozliczenia-energii',
+    title: 'Reklamacja rozliczenia energii',
+    when: 'Gdy faktura, saldo, energia pobrana/oddana lub rozliczenie prosumenta wygląda niespójnie.',
+    concerns: 'Pomaga rzeczowo opisać rozbieżność i poprosić o wyjaśnienie sposobu rozliczenia.',
+    limits: 'Nie zastępuje analizy umowy, taryfy ani indywidualnej porady prawnej.',
+    body: `Miejscowość, data: [miejsce i data]
+
+Nadawca:
+[imię i nazwisko]
+[adres]
+[numer klienta / numer umowy]
+[telefon / email]
+
+Adresat:
+[nazwa sprzedawcy energii]
+[adres]
+
+Temat: Prośba o wyjaśnienie / reklamacja rozliczenia energii
+
+Dzień dobry,
+
+proszę o wyjaśnienie rozliczenia energii dla punktu poboru:
+[adres / numer PPE].
+
+Wątpliwości dotyczą faktury / rozliczenia za okres:
+[okres rozliczeniowy].
+
+Opis problemu:
+- kwota faktury wydaje się niespójna z deklarowanym zużyciem / produkcją,
+- proszę o wyjaśnienie sposobu uwzględnienia energii oddanej i pobranej,
+- proszę o wskazanie, jakie dane z licznika zostały przyjęte do rozliczenia,
+- proszę o informację, czy zastosowano właściwą taryfę i warunki umowy.
+
+Dane pomocnicze:
+- numer faktury: [numer],
+- okres rozliczeniowy: [okres],
+- wskazania licznika, jeśli dostępne: [dane],
+- moc instalacji PV, jeśli dotyczy: [kWp].
+
+Proszę o pisemne wyjaśnienie pozycji rozliczenia oraz wskazanie danych, na podstawie których naliczono kwotę faktury.
+
+Z poważaniem,
+[imię i nazwisko]`
+  },
+  {
+    id: 'weryfikacja-licznika',
+    title: 'Wniosek o weryfikację licznika energii',
+    when: 'Gdy wskazania licznika, aplikacji lub faktur budzą wątpliwości i wymagają uporządkowania.',
+    concerns: 'Zbiera dane potrzebne do spokojnego zgłoszenia prośby o sprawdzenie licznika lub odczytów.',
+    limits: 'Nie stwierdza uszkodzenia licznika i nie zastępuje procedur operatora.',
+    body: `Miejscowość, data: [miejsce i data]
+
+Nadawca:
+[imię i nazwisko]
+[adres]
+[numer PPE / numer licznika]
+[telefon / email]
+
+Adresat:
+[nazwa OSD / sprzedawcy]
+[adres]
+
+Temat: Wniosek o weryfikację wskazań licznika energii
+
+Dzień dobry,
+
+proszę o weryfikację wskazań licznika energii dla punktu poboru:
+[adres punktu poboru].
+
+Powód zgłoszenia:
+- wskazania licznika / faktury / aplikacji budzą wątpliwości,
+- zauważono rozbieżność pomiędzy zużyciem, produkcją lub rozliczeniem,
+- problem dotyczy okresu: [okres].
+
+Proszę o informację:
+- jakie wskazania licznika zostały przyjęte do rozliczenia,
+- czy możliwa jest kontrola poprawności odczytu,
+- czy wymagane są dodatkowe dokumenty lub zdjęcia licznika.
+
+Załączniki, jeśli dostępne:
+- zdjęcia licznika,
+- faktura,
+- zrzuty ekranu z aplikacji,
+- historia wskazań.
+
+Z poważaniem,
+[imię i nazwisko]`
+  },
+  {
+    id: 'opis-problemu-serwis-pv',
+    title: 'Opis problemu technicznego dla serwisu PV',
+    when: 'Gdy trzeba przekazać serwisowi konkretny, uporządkowany opis objawów instalacji PV.',
+    concerns: 'Pomaga zebrać dane o falowniku, objawach, czasie występowania i załącznikach.',
+    limits: 'Nie diagnozuje przyczyny problemu i nie zastępuje wizyty serwisowej.',
+    body: `Miejscowość, data: [miejsce i data]
+
+Zgłaszający:
+[imię i nazwisko]
+[adres instalacji]
+[telefon / email]
+
+Adresat:
+[nazwa serwisu / instalatora]
+
+Temat: Opis problemu technicznego instalacji PV
+
+Dzień dobry,
+
+proszę o weryfikację problemu technicznego instalacji PV pod adresem:
+[adres instalacji].
+
+Podstawowe dane:
+- moc instalacji PV: [kWp],
+- model falownika: [model],
+- liczba stringów: [liczba],
+- data uruchomienia: [data],
+- czy instalacja ma magazyn energii: [tak/nie].
+
+Opis objawów:
+- co się dzieje: [opis],
+- od kiedy występuje problem: [data],
+- jak często występuje: [częstotliwość],
+- w jakich godzinach / warunkach: [opis],
+- czy pojawiają się komunikaty błędów: [tak/nie, jakie].
+
+Załączniki:
+- zrzuty ekranu z aplikacji,
+- zdjęcia falownika / zabezpieczeń,
+- historia błędów,
+- wykres produkcji,
+- zdjęcia licznika, jeśli dotyczy.
+
+Proszę o informację, jakie dane są jeszcze potrzebne do dalszej diagnostyki.
+
+Z poważaniem,
+[imię i nazwisko]`
+  }
+];
+
 function setMetaTag(name, content, attribute = 'name') {
   let tag = document.head.querySelector(`meta[${attribute}="${name}"]`);
   if (!tag) {
@@ -63,16 +293,40 @@ function setCanonical(pathname) {
   link.setAttribute('href', `${siteUrl}${pathname}`);
 }
 
-function usePageMeta({ title, description, pathname }) {
+function setStructuredData(schema) {
+  const id = 'page-structured-data';
+  let script = document.getElementById(id);
+
+  if (!schema) {
+    if (script) {
+      script.remove();
+    }
+    return;
+  }
+
+  if (!script) {
+    script = document.createElement('script');
+    script.id = id;
+    script.type = 'application/ld+json';
+    document.head.appendChild(script);
+  }
+  script.textContent = JSON.stringify(schema);
+}
+
+function usePageMeta({ title, description, pathname, keywords, schema }) {
   useEffect(() => {
     document.title = title;
     setMetaTag('description', description);
+    if (keywords) {
+      setMetaTag('keywords', keywords);
+    }
     setMetaTag('og:title', title, 'property');
     setMetaTag('og:description', description, 'property');
     setMetaTag('og:type', 'website', 'property');
     setMetaTag('og:url', `${siteUrl}${pathname}`, 'property');
     setCanonical(pathname);
-  }, [title, description, pathname]);
+    setStructuredData(schema);
+  }, [title, description, pathname, keywords, schema]);
 }
 
 function ContactCtas({ className = '' }) {
@@ -113,6 +367,7 @@ function Footer() {
     <footer className="footer">
       <strong>TDK&ProService Dawid Zabłotny</strong>
       <a href="/dawid-zablotny">Dawid Zabłotny - autor i właściciel</a>
+      <a href="/wzory-pism">Wzory pism OZE i energia</a>
       <a href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
       <a href="tel:+48691275254">+48 691 275 254</a>
       <span>Słupsk | Pomorskie | Polska</span>
@@ -204,6 +459,22 @@ function HomePage() {
             target="_blank"
           >
             Rozpocznij analizę online
+          </a>
+        </div>
+      </section>
+
+      <section className="section online-analysis-section">
+        <div className="online-analysis-card">
+          <div className="online-analysis-card__content">
+            <p className="eyebrow">Dokumenty praktyczne</p>
+            <h2>Wzory pism dla spraw OZE i energii</h2>
+            <p>
+              Proste wzory pomagające uporządkować zgłoszenie do OSD, sprzedawcy energii albo serwisu PV.
+              To materiały techniczno-informacyjne, nie porada prawna.
+            </p>
+          </div>
+          <a className="button button--secondary online-analysis-card__button" href="/wzory-pism">
+            Przejdź do wzorów
           </a>
         </div>
       </section>
@@ -427,11 +698,184 @@ function FounderPage() {
   );
 }
 
+function DocumentTemplateCard({ template }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('');
+
+  const copyTemplate = async () => {
+    try {
+      await navigator.clipboard.writeText(template.body);
+      setCopyStatus('Skopiowano treść wzoru.');
+    } catch {
+      setCopyStatus('Nie udało się skopiować automatycznie. Zaznacz treść ręcznie.');
+      setIsOpen(true);
+    }
+  };
+
+  return (
+    <article className="document-card">
+      <div className="document-card__header">
+        <div>
+          <p className="eyebrow">Wzór pisma</p>
+          <h3>{template.title}</h3>
+        </div>
+      </div>
+      <dl className="document-meta">
+        <div>
+          <dt>Kiedy użyć</dt>
+          <dd>{template.when}</dd>
+        </div>
+        <div>
+          <dt>Czego dotyczy</dt>
+          <dd>{template.concerns}</dd>
+        </div>
+        <div>
+          <dt>Czego nie gwarantuje</dt>
+          <dd>{template.limits}</dd>
+        </div>
+      </dl>
+      <div className="document-actions">
+        <button type="button" className="button button--secondary" onClick={() => setIsOpen((value) => !value)}>
+          {isOpen ? 'Ukryj wzór' : 'Pokaż wzór'}
+        </button>
+        <button type="button" className="button button--primary" onClick={copyTemplate}>
+          Kopiuj treść
+        </button>
+      </div>
+      {copyStatus && <p className="copy-status">{copyStatus}</p>}
+      {isOpen && <pre className="template-preview">{template.body}</pre>}
+    </article>
+  );
+}
+
+function DocumentsPage() {
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'Czy wzory pism TDK&ProService są poradą prawną?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Nie. Wzory mają charakter techniczno-informacyjny i pomagają uporządkować opis problemu. Nie zastępują porady prawnej ani analizy konkretnej sprawy.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Czy wzór trzeba dostosować do swojej sytuacji?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Tak. Każdy wzór zawiera miejsca na dane klienta, numer PPE, opis objawów i załączniki. Treść należy dopasować do rzeczywistych danych.'
+        }
+      },
+      {
+        '@type': 'Question',
+        name: 'Do czego służą wzory pism OZE i energii?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Służą do spokojnego opisania problemów takich jak wysokie napięcie, wyłączanie falownika, reklamacja rozliczenia energii, weryfikacja licznika lub zgłoszenie do serwisu PV.'
+        }
+      }
+    ]
+  };
+
+  usePageMeta({
+    title: 'Wzory pism OZE, OSD i energia | TDK&ProService',
+    description: 'Praktyczne wzory pism dotyczące OZE, OSD, wysokiego napięcia, falownika, reklamacji energii i licznika. Materiały techniczno-informacyjne TDK&ProService.',
+    pathname: '/wzory-pism',
+    keywords: 'OSD, falownik, wysokie napięcie, reklamacja energii, licznik energii, wzór pisma OZE, instalacja PV',
+    schema: faqSchema
+  });
+
+  return (
+    <main className="site-shell">
+      <section className="documents-hero">
+        <div>
+          <p className="eyebrow">Strefa dokumentów</p>
+          <h1>Wzory pism dla spraw OZE i energii</h1>
+          <p className="hero__subtitle">Spokojne formularze do uporządkowania problemu technicznego</p>
+          <p className="hero__lead">
+            Poniższe wzory pomagają opisać problem, zebrać dane i przygotować rzeczową komunikację
+            z OSD, sprzedawcą energii lub serwisem PV. Nie są poradą prawną, nie zastępują pełnej
+            diagnostyki i wymagają dostosowania do konkretnej sytuacji.
+          </p>
+          <div className="hero__actions">
+            <a className="button button--primary" href="#wzory">Zobacz wzory</a>
+            <a className="button button--secondary" href="/">Wróć do strony głównej</a>
+          </div>
+        </div>
+        <aside className="documents-note" aria-label="Informacja o zakresie wzorów">
+          <strong>Zakres</strong>
+          <p>Techniczno-informacyjne wzory do opisania problemu.</p>
+          <p>Bez automatycznych decyzji, bez agresywnych roszczeń, bez udawania porady prawnej.</p>
+        </aside>
+      </section>
+
+      <section className="section documents-intro">
+        <div className="section__header">
+          <p className="eyebrow">Jak korzystać</p>
+          <h2>Najpierw dane, potem wysyłka</h2>
+        </div>
+        <div className="documents-rules">
+          <article>
+            <h3>Uzupełnij konkrety</h3>
+            <p>Wpisz adres, numer PPE, okres rozliczeniowy, model falownika, daty i objawy.</p>
+          </article>
+          <article>
+            <h3>Dodaj załączniki</h3>
+            <p>Zrzuty ekranu, faktury, zdjęcia licznika i historia błędów pomagają ograniczyć chaos.</p>
+          </article>
+          <article>
+            <h3>Zachowaj spokojny ton</h3>
+            <p>Rzeczowy opis problemu zwykle działa lepiej niż emocjonalne oskarżenia.</p>
+          </article>
+        </div>
+      </section>
+
+      <section className="section" id="wzory">
+        <div className="section__header">
+          <p className="eyebrow">Biblioteka</p>
+          <h2>Podstawowe wzory</h2>
+          <p>
+            Każdy wzór można podejrzeć albo skopiować. Przed wysłaniem sprawdź dane, usuń puste
+            pola i dopasuj opis do swojej sytuacji.
+          </p>
+        </div>
+        <div className="document-list">
+          {documentTemplates.map((template) => (
+            <DocumentTemplateCard key={template.id} template={template} />
+          ))}
+        </div>
+      </section>
+
+      <section className="section contact-section" id="kontakt">
+        <div className="section__header">
+          <p className="eyebrow">Wsparcie</p>
+          <h2>Nie wiesz, które pismo wybrać?</h2>
+          <p>
+            Jeśli problem dotyczy pracy instalacji, napięcia, rozliczeń lub licznika, możesz opisać
+            sytuację. TDK&ProService pomoże uporządkować dane potrzebne do dalszej diagnostyki.
+          </p>
+          <ContactSectionLinks />
+        </div>
+        <ContactForm />
+      </section>
+
+      <Footer />
+    </main>
+  );
+}
+
 export default function App() {
   const pathname = window.location.pathname.replace(/\/$/, '') || '/';
 
   if (pathname === '/dawid-zablotny' || pathname === '/o-mnie') {
     return <FounderPage />;
+  }
+
+  if (pathname === '/wzory-pism' || pathname === '/strefa-dokumentow') {
+    return <DocumentsPage />;
   }
 
   return <HomePage />;
