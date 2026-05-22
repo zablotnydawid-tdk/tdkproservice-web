@@ -898,7 +898,7 @@ function KodeksOnlinePage() {
           <div className="hero__actions">
             <a
               className="button button--primary"
-              href="https://api.tdkproservice.pl/form-analyze"
+              href="https://api.tdkproservice.pl"
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -972,7 +972,7 @@ function KodeksOnlinePage() {
           </div>
           <a
             className="button button--primary online-analysis-card__button"
-            href="https://api.tdkproservice.pl/form-analyze"
+            href="https://api.tdkproservice.pl"
             rel="noopener noreferrer"
             target="_blank"
           >
