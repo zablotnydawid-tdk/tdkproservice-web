@@ -19,6 +19,9 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -28,6 +31,7 @@ body {
     radial-gradient(circle at 15% 0%, rgba(73, 199, 232, 0.14), transparent 34rem),
     linear-gradient(135deg, #071014 0%, #0b151b 48%, #071014 100%);
   color: var(--text);
+  overflow-x: hidden;
 }
 
 a {
@@ -81,6 +85,8 @@ h1 {
   font-size: clamp(3rem, 8vw, 6.8rem);
   line-height: 0.94;
   letter-spacing: 0;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 h2 {
@@ -630,6 +636,106 @@ blockquote {
   }
 }
 
+@media (max-width: 640px) {
+  body {
+    background:
+      radial-gradient(circle at 12% 0%, rgba(73, 199, 232, 0.08), transparent 24rem),
+      linear-gradient(135deg, #071014 0%, #09151a 55%, #071014 100%);
+  }
+
+  .site-shell {
+    width: min(100% - 24px, 520px);
+  }
+
+  .hero {
+    gap: 26px;
+    padding: 40px 0 34px;
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
+  .eyebrow {
+    margin-bottom: 12px;
+    font-size: 0.72rem;
+    letter-spacing: 0.13em;
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: clamp(2.35rem, 11.5vw, 3.35rem);
+    line-height: 1.03;
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+
+  .hero__subtitle {
+    max-width: 30rem;
+    color: #eef8fb;
+    font-size: clamp(1.05rem, 4.8vw, 1.28rem);
+    line-height: 1.32;
+  }
+
+  .hero__lead,
+  .large-copy {
+    font-size: 0.98rem;
+    line-height: 1.68;
+  }
+
+  .hero__actions,
+  .contact-ctas {
+    display: grid;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .contact-ctas--hero {
+    margin-top: 16px;
+  }
+
+  .hero__actions .button,
+  .contact-ctas .contact-cta {
+    width: 100%;
+  }
+
+  .button,
+  .contact-cta {
+    min-height: 50px;
+    padding-inline: 14px;
+  }
+
+  .button--secondary {
+    border-color: rgba(151, 205, 229, 0.28);
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  .contact-cta--messenger {
+    border-color: rgba(72, 166, 239, 0.62);
+    background: #1686e8;
+  }
+
+  .contact-note {
+    max-width: 100%;
+    margin-top: 14px;
+    color: #9be7c5;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  .contact-fallback {
+    max-width: 100%;
+    color: #a9bbc4;
+    font-size: 0.86rem;
+  }
+
+  .hero__panel {
+    margin-top: 8px;
+    background: rgba(12, 27, 35, 0.92);
+    box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+  }
+}
+
 @media (max-width: 520px) {
   .hero__actions,
   .contact-ctas,
@@ -678,7 +784,8 @@ blockquote {
   }
 
   h1 {
-    font-size: 3rem;
+    font-size: clamp(2.25rem, 11.4vw, 2.95rem);
+    line-height: 1.04;
   }
 
   h2 {
