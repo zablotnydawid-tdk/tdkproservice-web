@@ -402,7 +402,7 @@ function Footer() {
       <a href="/wzory-pism">Wzory pism i zgłoszeń</a>
       <a href="mailto:kontakt@tdkproservice.pl">kontakt@tdkproservice.pl</a>
       <a href="tel:+48691275254">+48 691 275 254</a>
-      <span>Słupsk | Pomorskie | Polska</span>
+      <span>Słupsk / Darłowo | Pomorskie | Polska</span>
     </footer>
   );
 }
@@ -691,7 +691,7 @@ function FounderPage() {
         <aside className="author-card" aria-label="Profil TDK&ProService">
           <span>TDK&ProService</span>
           <strong>Dawid Zabłotny</strong>
-          <p>Słupsk | Pomorskie | Polska</p>
+          <p>Słupsk / Darłowo | Pomorskie | Polska</p>
           <p>PV | Pompy ciepła | Magazyny energii | Rozliczenia</p>
         </aside>
       </section>
