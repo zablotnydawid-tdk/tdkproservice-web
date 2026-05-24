@@ -22,6 +22,38 @@ const workflow = [
   'Wniosek / raport'
 ];
 
+const moneySignals = [
+  'rachunki nie spadają mimo działającej instalacji PV',
+  'pompa ciepła zużywa więcej energii niż wynika z oczekiwań',
+  'magazyn energii jest podłączony, ale nie poprawia realnej autokonsumpcji',
+  'rozliczenie od sprzedawcy energii nie pasuje do danych z falownika'
+];
+
+const analysisTriggers = [
+  'masz PV, ale nadal płacisz zbyt dużo za energię',
+  'falownik nie pokazuje błędu, ale produkcja lub rozliczenie budzi wątpliwości',
+  'pompa ciepła działa, lecz koszty ogrzewania są nieproporcjonalne',
+  'chcesz przed reklamacją uporządkować dane i objawy technicznie'
+];
+
+const diagnosticScenarios = [
+  {
+    title: 'PV działa, rachunki zostają wysokie',
+    problem: 'Instalacja produkuje energię, ale klient nie widzi oczekiwanego efektu na kosztach.',
+    check: 'Porównujemy produkcję, zużycie, autokonsumpcję, rozliczenie i możliwe straty systemowe.'
+  },
+  {
+    title: 'Pompa ciepła grzeje, ale pracuje drogo',
+    problem: 'Urządzenie utrzymuje temperaturę, lecz pobór energii sugeruje błędne ustawienia lub tryb pracy.',
+    check: 'Sprawdzamy objawy taktowania, krzywą grzewczą, grzałki i wpływ sposobu użytkowania.'
+  },
+  {
+    title: 'Magazyn energii nie daje efektu',
+    problem: 'System hybrydowy jest zamontowany, ale nie poprawia wyraźnie bilansu energii.',
+    check: 'Analizujemy ładowanie, rozładowanie, priorytety pracy i zgodność działania z celem inwestora.'
+  }
+];
+
 const contactCtas = [
   {
     href: 'tel:+48691275254',
@@ -421,6 +453,64 @@ function HomePage() {
           nieefektywnie. Magazyn energii może być podłączony, ale źle wykorzystany. Rachunki mogą
           się nie zgadzać mimo poprawnej pracy urządzeń.
         </p>
+      </section>
+
+      <section className="section money-section">
+        <div className="section__header">
+          <p className="eyebrow">Koszty i straty</p>
+          <h2>Problem często widać dopiero na rachunku</h2>
+          <p>
+            Urządzenie może pracować, aplikacja może pokazywać produkcję, a mimo tego system nadal
+            generuje koszty. Dlatego patrzymy nie tylko na sprzęt, ale też na bilans energii,
+            rozliczenie, ustawienia i sposób użytkowania.
+          </p>
+        </div>
+        <div className="signal-grid">
+          {moneySignals.map((signal) => (
+            <article className="signal-card" key={signal}>
+              <span className="service-card__marker" />
+              <p>{signal}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="section decision-section">
+        <div className="decision-panel">
+          <div>
+            <p className="eyebrow">Kiedy sprawdzić system</p>
+            <h2>Kiedy warto zrobić analizę online</h2>
+            <p>
+              Wstępna analiza pomaga uporządkować objawy, liczby i kierunek dalszej diagnostyki
+              zanim podejmiesz rozmowę z serwisem, instalatorem, sprzedawcą energii albo operatorem.
+            </p>
+          </div>
+          <div className="decision-list">
+            {analysisTriggers.map((trigger) => (
+              <p key={trigger}>{trigger}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section scenarios-section">
+        <div className="section__header">
+          <p className="eyebrow">Scenariusze diagnostyczne</p>
+          <h2>Co realnie sprawdzamy</h2>
+          <p>
+            Bez wskazywania winnych na starcie. Najpierw porządkujemy objawy, dane i zależności,
+            a dopiero później wskazujemy możliwe przyczyny strat.
+          </p>
+        </div>
+        <div className="scenario-grid">
+          {diagnosticScenarios.map((scenario) => (
+            <article className="scenario-card" key={scenario.title}>
+              <h3>{scenario.title}</h3>
+              <p><strong>Problem:</strong> {scenario.problem}</p>
+              <p><strong>Sprawdzamy:</strong> {scenario.check}</p>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="section" id="zakres">

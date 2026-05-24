@@ -358,6 +358,104 @@ p {
   box-shadow: 0 0 20px rgba(73, 199, 232, 0.7);
 }
 
+.money-section {
+  padding-bottom: 58px;
+}
+
+.signal-grid,
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.signal-card,
+.scenario-card,
+.decision-panel {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--panel);
+  box-shadow: 0 14px 46px rgba(0, 0, 0, 0.18);
+}
+
+.signal-card {
+  display: flex;
+  gap: 14px;
+  min-height: 88px;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.signal-card p {
+  margin: 0;
+  color: var(--text);
+  font-weight: 750;
+  line-height: 1.48;
+}
+
+.decision-panel {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  gap: 42px;
+  align-items: start;
+  padding: clamp(24px, 4vw, 38px);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(73, 199, 232, 0.13), transparent 24rem),
+    linear-gradient(135deg, rgba(16, 36, 45, 0.92), rgba(7, 16, 20, 0.9));
+}
+
+.decision-panel h2 {
+  max-width: 640px;
+}
+
+.decision-list {
+  display: grid;
+  gap: 10px;
+}
+
+.decision-list p {
+  margin: 0;
+  border-left: 2px solid var(--accent);
+  padding: 12px 0 12px 16px;
+  color: var(--text);
+  background: linear-gradient(90deg, rgba(73, 199, 232, 0.08), transparent);
+  font-weight: 750;
+}
+
+.scenario-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.scenario-card {
+  min-height: 244px;
+  padding: 22px;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.scenario-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(125, 227, 255, 0.44);
+  background: rgba(18, 43, 54, 0.92);
+}
+
+.scenario-card h3 {
+  margin-bottom: 16px;
+  color: var(--text);
+  font-size: 1.16rem;
+}
+
+.scenario-card p {
+  margin-bottom: 14px;
+}
+
+.scenario-card p:last-child {
+  margin-bottom: 0;
+}
+
+.scenario-card strong {
+  color: var(--accent-strong);
+}
+
 .online-analysis-section {
   padding-top: 48px;
 }
@@ -884,6 +982,7 @@ blockquote {
   .kodeks-hero,
   .section--problem,
   .author-method,
+  .decision-panel,
   .online-analysis-card,
   .expert-section,
   .media-card,
@@ -897,6 +996,8 @@ blockquote {
   }
 
   .service-grid,
+  .signal-grid,
+  .scenario-grid,
   .trust-grid,
   .documents-rules,
   .document-meta,
@@ -935,6 +1036,10 @@ blockquote {
   }
 
   .online-analysis-card {
+    gap: 24px;
+  }
+
+  .decision-panel {
     gap: 24px;
   }
 
@@ -1040,6 +1145,12 @@ blockquote {
     margin-top: 8px;
     background: rgba(12, 27, 35, 0.92);
     box-shadow: 0 16px 44px rgba(0, 0, 0, 0.28);
+  }
+
+  .signal-card,
+  .scenario-card,
+  .decision-panel {
+    padding: 18px;
   }
 }
 
