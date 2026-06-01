@@ -59,7 +59,13 @@ export default function ContactForm() {
 
   return (
     <section className="contact-card">
-      <form className="contact-form" method="post" action={FORM_ACTION} onSubmit={handleSubmit}>
+      <form
+        className="contact-form"
+        method="post"
+        action={FORM_ACTION}
+        encType="application/x-www-form-urlencoded"
+        onSubmit={handleSubmit}
+      >
         <input
           name="name"
           placeholder="Imię"
