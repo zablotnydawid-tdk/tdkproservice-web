@@ -74,6 +74,26 @@ const contactCtas = [
 ];
 
 const siteUrl = 'https://www.tdkproservice.pl';
+const platformUrl = 'https://platform.tdkproservice.pl';
+
+const platformBenefits = [
+  {
+    title: 'Darmowe analizy startowe',
+    text: 'Użytkownik może wykonać pierwsze analizy AnchorGrid bez kontaktu telefonicznego i bez ręcznego umawiania.'
+  },
+  {
+    title: 'Raporty PDF',
+    text: 'Wyniki mogą zostać uporządkowane w czytelny raport techniczny do dalszej rozmowy z operatorem.'
+  },
+  {
+    title: 'Diagnostyka magazynów energii',
+    text: 'Platforma wspiera analizę pracy BESS, temperatury, C-rate, ryzyka i rekomendacji operatorskiej.'
+  },
+  {
+    title: 'Dostęp API',
+    text: 'Po wykorzystaniu limitu możliwy jest dostęp komercyjny przez klucz API ustalany indywidualnie.'
+  }
+];
 
 const documentTemplates = [
   {
@@ -409,8 +429,8 @@ function Footer() {
 
 function HomePage() {
   usePageMeta({
-    title: 'TDK&ProService | Diagnostyka OZE i Audyt Rozliczeń Energii',
-    description: 'Diagnostyka instalacji PV, pomp ciepła, magazynów energii oraz audyt rozliczeń energii. TDK&ProService Dawid Zabłotny.',
+    title: 'TDK&ProService | Energy Intelligence Platform i diagnostyka OZE',
+    description: 'Wejście do TDK Energy Intelligence Platform oraz diagnostyki instalacji PV, pomp ciepła, magazynów energii i rozliczeń energii.',
     pathname: '/'
   });
 
@@ -422,11 +442,12 @@ function HomePage() {
           <h1>TDK&ProService</h1>
           <p className="hero__subtitle">Diagnostyka systemowa OZE, pomp ciepła i magazynów energii</p>
           <p className="hero__lead">
-            Nie zgadujemy. Sprawdzamy. Instalacja może działać, a jednocześnie generować straty.
-            Dlatego analizujemy cały układ: projekt, montaż, konfigurację, sieć, sterowanie i sposób użytkowania.
+            TDK&ProService łączy diagnostykę OZE z nową platformą TDK Energy Intelligence.
+            Wejdź do platformy, wykonaj darmowe analizy startowe i uporządkuj dane przed rozmową
+            z operatorem lub dalszym raportem technicznym.
           </p>
           <div className="hero__actions">
-            <a className="button button--primary" href="#kontakt">Zgłoś instalację do analizy</a>
+            <a className="button button--primary" href={platformUrl}>Uruchom Platformę TDK Energy Intelligence</a>
             <a className="button button--secondary" href="#zakres">Zobacz zakres pracy</a>
           </div>
           <ContactCtas className="contact-ctas--hero" />
@@ -440,6 +461,35 @@ function HomePage() {
           <span>Pompy ciepła</span>
           <span>Magazyny energii</span>
           <span>Rozliczenia</span>
+        </div>
+      </section>
+
+      <section className="section platform-section" id="platforma">
+        <div className="platform-card">
+          <div className="platform-card__content">
+            <p className="eyebrow">Nowa Platforma Online</p>
+            <h2>TDK Energy Intelligence Platform</h2>
+            <p>
+              Główna domena prowadzi teraz do publicznej bramki TDK&ProService, a właściwa praca
+              analityczna odbywa się w platformie pod adresem platform.tdkproservice.pl.
+            </p>
+            <p>
+              To naturalne przejście dla klienta: najpierw poznaje usługę, potem uruchamia platformę,
+              wykonuje analizę i dopiero przy dalszym dostępie przechodzi do kontaktu komercyjnego.
+            </p>
+            <a className="button button--primary platform-card__button" href={platformUrl}>
+              Uruchom Platformę TDK Energy Intelligence
+            </a>
+          </div>
+          <div className="platform-benefit-grid" aria-label="Funkcje platformy">
+            {platformBenefits.map((benefit) => (
+              <article className="platform-benefit" key={benefit.title}>
+                <span className="service-card__marker" />
+                <h3>{benefit.title}</h3>
+                <p>{benefit.text}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1093,4 +1143,3 @@ export default function App() {
 
   return <HomePage />;
 }
-

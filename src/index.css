@@ -298,6 +298,64 @@ p {
   border-top: 1px solid var(--line);
 }
 
+.platform-section {
+  padding-top: 54px;
+}
+
+.platform-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+  gap: clamp(24px, 5vw, 52px);
+  align-items: center;
+  padding: clamp(24px, 5vw, 46px);
+  border: 1px solid rgba(125, 227, 255, 0.34);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(73, 199, 232, 0.18), transparent 24rem),
+    linear-gradient(135deg, rgba(16, 36, 45, 0.96), rgba(5, 14, 18, 0.96));
+  box-shadow: var(--shadow);
+}
+
+.platform-card h2 {
+  max-width: 760px;
+}
+
+.platform-card__content p {
+  max-width: 720px;
+  margin-bottom: 14px;
+}
+
+.platform-card__button {
+  min-height: 58px;
+  margin-top: 18px;
+  padding: 0 24px;
+}
+
+.platform-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.platform-benefit {
+  min-height: 178px;
+  border: 1px solid rgba(151, 205, 229, 0.16);
+  border-radius: 8px;
+  padding: 20px;
+  background: rgba(3, 12, 16, 0.46);
+}
+
+.platform-benefit h3 {
+  margin: 12px 0 10px;
+  color: var(--text);
+}
+
+.platform-benefit p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 .section__header {
   max-width: 760px;
   margin-bottom: 34px;
@@ -980,6 +1038,7 @@ blockquote {
   .author-hero,
   .documents-hero,
   .kodeks-hero,
+  .platform-card,
   .section--problem,
   .author-method,
   .decision-panel,
@@ -998,6 +1057,7 @@ blockquote {
   .service-grid,
   .signal-grid,
   .scenario-grid,
+  .platform-benefit-grid,
   .trust-grid,
   .documents-rules,
   .document-meta,
